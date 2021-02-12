@@ -2,6 +2,7 @@ import { ReviewService } from './review/review.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -22,7 +23,8 @@ import { SearchService } from './search/search.service';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [ReviewService, SearchService],
   bootstrap: [AppComponent]

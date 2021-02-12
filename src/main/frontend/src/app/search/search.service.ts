@@ -6,15 +6,18 @@ import { of } from 'rxjs/observable/of';
 @Injectable()
 export class SearchService {
   // TheMovieDB API endpoint for searching movies
+  private query: string = 'Star+Wars';
   private searchUrl =
-    'https://api.themoviedb.org/3/search/movie?api_key=b2000054e469cfa7dd6ee85e1f544007&query=Star+Wars';
+    'https://api.themoviedb.org/3/search/movie?api_key=b2000054e469cfa7dd6ee85e1f544007&query=';
 
     // private search: Search;
     private mock_search: Search;
 
     // get list of movies matching by name
-  public searchAPI(): Observable<Search> {
-    return this.http.get<Search>(this.searchUrl);
+  public searchAPI(title: string): Observable<Search> {
+
+
+    return this.http.get<Search>(this.searchUrl + title);
     // for testing
     // return of(this.mock_search);
   }
