@@ -11,6 +11,8 @@ import { ReviewComponent } from './review/review.component';
 import { SearchComponent } from './search/search.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SearchService } from './search/search.service';
+import { DetailsComponent } from './details/details.component';
+import { DetailsService } from './details/details.service';
 
 
 @NgModule({
@@ -18,7 +20,8 @@ import { SearchService } from './search/search.service';
     AppComponent,
     ReviewComponent,
     SearchComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,7 @@ import { SearchService } from './search/search.service';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [ReviewService, SearchService],
+  providers: [ReviewService, SearchService, DetailsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

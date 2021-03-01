@@ -1,0 +1,3 @@
+class Genres {
+  genres: Genre[];
+}

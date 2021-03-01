@@ -13,14 +13,15 @@ public class Recommendation {
     private String title;
     @Column
     private String text;
-    //@Column
-    private String date = "";
+    @Column
+    private String date;
 
     public Recommendation(){}
 
-    public Recommendation(String title, String text) {
+    public Recommendation(String title, String text, String date) {
         this.title = title;
         this.text = text;
+        this.date = date;
     }
 
     public Long getId() {

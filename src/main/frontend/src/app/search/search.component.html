@@ -1,31 +1,58 @@
 <div>
 
-  <div class="row d-flex justify-content-center flex-wrap">
-    <div class="col-auto">
-      <h5>Search</h5>
-    </div>
-  </div>
+  <!-- Showed before first search as home search page
+  <div class="d-flex justify-content-center">
+    <h1>Search Movies</h1>
+  </div> -->
 
-  <div class="row d-flex justify-content-center flex-wrap bg-warning" >
-    <div class="col d-flex justify-content-center flex-wrap bg-success">
+  <br>
+  <!-- Search bar -->
+  <div class="col d-flex justify-content-center">
 
-      <div class="row flex-wrap bg-danger">
-        <div class="col-auto bg-info">
-          <input class="form-control" [(ngModel)]="searchTitle" (keydown.enter)="searchMovies()" type="text" placeholder="">
-           <!--  -->
-        </div>
-        <div class="col-auto bg-secondary">
-          <button class=" btn btn-primary" (click)="searchMovies()">Search</button>
-        </div>
+    <div class="row align-items-center">
+      <div>
+        <input class="form-control" [(ngModel)]="searchTitle" (keydown.enter)="searchMovies()" placeholder="Search">
+      </div>
+      <div>
+        <button class=" btn btn-primary" (click)="searchMovies()">
+          <i class="fa fa-search" style="font-size:16px"></i>
+        </button>
       </div>
     </div>
   </div>
   <br>
 
-  <ul class="list-group" *ngFor="let searchItem of results">
-    <li class="list-group-item ">{{ searchItem.id }}</li>
-    <li class="list-group-item">{{ searchItem.title }}</li>
-    <li class="list-group-item">{{ searchItem.overview }}</li>
-    <li class="list-group-item">{{ searchItem.release_date }}</li>
-  </ul>
+  <!-- List is search items -->
+  <div *ngFor="let result of results">
+
+    <!-- Search result items from TMDB api -->
+    <div id="search-item" (click)="showMovieDetail(result.id)">
+
+      <!-- <ng-container *ngIf="result.poster_path != null; then posterPath; else backdropPath">
+      </ng-container>
+      <ng-template #posterPath>
+        <img class="img-fluid" src="{{ baseImageUrl + result.poster_path}}" />
+      </ng-template>
+      <ng-template #backdropPath>
+        <img class="img-fluid" src="{{ baseImageUrl + result.backdrop_path}}" />
+      </ng-template> -->
+      <div id="search-item-content" class="d-flex flex-row">
+        <img class="img-fluid" src="{{ baseImageUrl + result.poster_path}}" />
+
+        <div class="px-4 d-flex flex-column">
+          <h5 class="mt-4">{{ result.title }} </h5>
+          <p class="mt-auto">{{ result.release_date }}</p>
+          <p class="mt-0">{{getGenreSearch(result.genre_ids)}}</p>
+        </div>
+      </div>
+
+      <div *ngIf="showTextArea" id="search-item-edit" class=" m-3 bg-primary d-flex flex-row justify-content-center align-items-center">
+        <textarea class="w-100 h-100 text-capitalize" id="add-review" autofocus spellcheck="false">
+        </textarea>
+      </div>
+
+    </div>
+    <br>
+  </div>
+
 </div>

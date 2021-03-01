@@ -1,9 +1,21 @@
 <div>
+
   <h4 class="d-flex justify-content-center">Reviews</h4>
-  <ul class="list-group  m-2 border border-info" *ngFor="let review of reviews">
-    <li class="list-group-item ">{{ review.id }}</li>
-    <li class="list-group-item">{{ review.title }}</li>
-    <li class="list-group-item">{{ review.text }}</li>
-    <!-- <li class="list-group-item">{{ rec2.date }}</li> -->
-  </ul>
+
+  <!-- List is search items -->
+  <div *ngFor="let review of reviews">
+
+    <!-- Search result items from TMDB api -->
+    <div id="review-item" class="d-flex">
+      <div class="col px-4 d-flex flex-column ">
+        <p class="mt-4">{{review.text}}</p>
+        <div><h5 class="mt-auto">{{ review.title }} </h5>
+          <p class="mt-0">{{ review.date }}</p>
+        </div>
+      </div>
+      <img class="img-fluid" src="https://image.tmdb.org/t/p/w154/kOVEVeg59E0wsnXmF9nrh6OmWII.jpg" />
+    </div>
+
+    <br>
+  </div>
 </div>

@@ -1,0 +1,35 @@
+<div>
+  <div class="d-flex justify-content-center">
+    <h3>Details</h3>
+  </div>
+  <div id="details-item" *ngIf="movieDetails">
+
+    <div class="d-flex flex-column flex-lg-row" >
+
+      <img class="img-fluid my-2" src="{{ baseImageUrl + movieDetails.poster_path}}" />
+
+      <div class="px-4 m-2 d-flex flex-column ">
+
+        <div class="d-flex align-items-center h-75 ">
+          <h2 class="">{{ movieDetails.title }} </h2>
+        </div>
+        <p class="mt-auto">{{getGenreDetails(movieDetails.genres)}}</p>
+        <div class="d-flex flex-row">
+
+          <div class="d-flex flex-row">
+            <p class="mr-2">Rating</p>
+            <p class="mr-5">{{ movieDetails.vote_average}}</p>
+          </div>
+          <div class="d-flex flex-row">
+            <p class="mr-2">{{ movieDetails.status }}</p>
+            <p>{{ movieDetails.release_date }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="m-2">{{ movieDetails.overview}}</p>
+    </div>
+  </div>
+</div>

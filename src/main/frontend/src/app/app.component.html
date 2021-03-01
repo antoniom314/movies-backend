@@ -1,12 +1,18 @@
-<div class="container-fluid">
-  <nav class="navbar navbar-light bg-light justify-content-end">
+<div class="container">
 
-    <button [routerLink]="['/']" class="btn btn-info  mr-2">Home</button>
-    <button [routerLink]="['/reviews']" class="btn btn-info  mr-2">Review</button>
-    <button [routerLink]="['/search']" class="btn btn-info  mr-2">Search</button>
-  </nav>
+  <div class="col-md-10 offset-md-1">
 
-  <router-outlet></router-outlet>
+    <nav class="navbar d-flex justify-content-end bg-light">
+
+      <button type="button" [routerLink]="['/']" class="btn btn-info btn-sm  mr-2">Home</button>
+      <button type="button" [routerLink]="['/review']" class="btn btn-info btn-sm  mr-2">Review</button>
+      <button  type="button" [routerLink]="['/search']" class="btn btn-info btn-sm  mr-2">Search</button>
+      <button  type="button" [routerLink]="['/details/49026']" class="btn btn-info btn-sm  mr-2">Details</button>
+    </nav>
+
+    <router-outlet></router-outlet>
+
+  </div>
 </div>
 
 
