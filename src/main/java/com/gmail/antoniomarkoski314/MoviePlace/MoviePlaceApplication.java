@@ -21,7 +21,7 @@ public class MoviePlaceApplication {
     return args -> {
       Stream.of("Terminator", "Star Wars", "Die Hard", "Hit", "The Godfather").forEach(name -> {
         Recommendation user = new Recommendation(name, "Rey develops her newly discovered abilities with the guidance of Luke Skywalker, who is unsettled by the strength of her powers. Meanwhile, the Resistance prepares to do battle with the First Order.\",\n",
-		   "1.1.1970");
+		   "1.1.1970", "/6t8ES1d12OzWyCGxBeDYLHoaDrT.jpg");
         repository.save(user);
       });
       repository.findAll().forEach(System.out::println);

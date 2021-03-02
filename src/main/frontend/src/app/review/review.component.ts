@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Review } from './review';
+
 import { ReviewService } from './review.service';
 
 @Component({
@@ -12,13 +11,15 @@ export class ReviewComponent implements OnInit {
 
   public reviews: Review[];
 
+  public baseImageUrl = 'https://image.tmdb.org/t/p/w154';
+
   constructor(private reviewService: ReviewService) { }
 
   ngOnInit() {
 
     this.reviewService.findAll().subscribe(data => {
 
-      this.reviews = data;
+      this.reviews = data.reverse();
     });
   }
 

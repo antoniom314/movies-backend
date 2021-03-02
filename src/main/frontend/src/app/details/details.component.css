@@ -8,3 +8,14 @@
 #details-item:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
+#review-edit {
+
+  height: 15em;
+}
+
+#text-area {
+  font-size: medium;
+  resize: none;
+  border-color: rgba(0, 0, 0, 0.171);
+  outline-color: rgba(0, 0, 0, 0.171);
+}

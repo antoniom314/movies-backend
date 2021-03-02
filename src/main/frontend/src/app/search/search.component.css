@@ -13,12 +13,3 @@
   height: 11em;
 }
 
-#search-item-edit {
-  height: 10em;
-}
-
-textarea {
-  resize: none;
-  border-color: rgba(0, 0, 0, 0.171);
-  outline-color: rgba(0, 0, 0, 0.171);
-}

@@ -1,3 +1,5 @@
+
+
 class MovieDetails {
   adult: boolean;
   backdrop_path: string;
@@ -24,35 +26,4 @@ class MovieDetails {
   video: boolean;
   vote_average: number;
   vote_count: number;
-}
-
-class GenreIds {
-  id: number;
-  name: string;
-}
-
-class BelongsToCollection {
-  id: number;
-  name: string;
-  poster_path: string;
-  backdrop_path: string;
-}
-
-
-class ProductionCompany {
-  id: number;
-  logo_path: string;
-  name: string;
-  origin_country: string;
-}
-
-class ProductionCountry {
-  iso_3166_1: string;
-  name: string;
-}
-
-class SpokenLanguage {
-  english_name: string;
-  iso_639_1: string;
-  name: string;
 }

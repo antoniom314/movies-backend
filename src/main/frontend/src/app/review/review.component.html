@@ -9,11 +9,12 @@
     <div id="review-item" class="d-flex">
       <div class="col px-4 d-flex flex-column ">
         <p class="mt-4">{{review.text}}</p>
-        <div><h5 class="mt-auto">{{ review.title }} </h5>
+        <div class="mt-auto">
+          <h5>{{ review.title }}</h5>
           <p class="mt-0">{{ review.date }}</p>
         </div>
       </div>
-      <img class="img-fluid" src="https://image.tmdb.org/t/p/w154/kOVEVeg59E0wsnXmF9nrh6OmWII.jpg" />
+      <img class="img-fluid" src="{{ baseImageUrl + review.imagePath}}" />
     </div>
 
     <br>

@@ -8,13 +8,11 @@ import { Observable } from 'rxjs/Observable';
 export class DetailsService {
 
   // TheMovieDB API endpoint for geting movie details
-  private detailsUrl =
-    'https://api.themoviedb.org/3/movie/';
+  private detailsUrl = 'https://api.themoviedb.org/3/movie/';
   private apiKey = 'api_key=b2000054e469cfa7dd6ee85e1f544007';
 
   constructor(private http: HttpClient) {}
 
-  private movieMockId = 181808;
   private mockDetailsPath = '../../assets/movie-details-example.json';
   private genrePath = '../../assets/genres.json';
 

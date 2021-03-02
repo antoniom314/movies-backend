@@ -19,6 +19,7 @@ public class RecommendationControler {
 
     @GetMapping("/api/review")
     public List<Recommendation> getAllRecommendations(){
+
         return recRepository.findAll();
     }
 
@@ -34,9 +35,7 @@ public class RecommendationControler {
     }
 
     @PostMapping("/api/review")
-    public Recommendation addRecommendation(@RequestBody Recommendation rec){
-        return recRepository.save(rec);
-    }
+    public Recommendation addRecommendation(@RequestBody Recommendation rec){ return recRepository.save(rec); }
 
     @PutMapping("/api/review/{id}")
     public Recommendation updateRecommendation(@RequestBody Recommendation rec, @PathVariable Long id){

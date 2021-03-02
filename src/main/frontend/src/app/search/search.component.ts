@@ -21,8 +21,6 @@ export class SearchComponent implements OnInit {
   public genreMap;
   private genreHandler: GenreHandler;
 
-  public showTextArea = false;
-
   constructor(private searchService: SearchService, private router: Router) {}
 
   public searchMovies() {
@@ -47,7 +45,6 @@ export class SearchComponent implements OnInit {
   public showMovieDetail(movieId: number) {
 
     this.router.navigate(['/details', movieId]);
-    // this.showTextArea = !this.showTextArea;
   }
 
   ngOnInit() {
