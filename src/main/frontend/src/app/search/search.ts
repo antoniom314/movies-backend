@@ -1,11 +1,11 @@
-class Search {
+export interface Search {
   page: number;
   results: Result[];
   total_pages: number;
   total_results: number;
 }
 
-class Result {
+export interface Result {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];

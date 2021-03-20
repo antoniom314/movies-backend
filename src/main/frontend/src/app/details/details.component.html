@@ -1,50 +1,75 @@
 <div>
 
-  <div id="details-item" *ngIf="movieDetails">
+  <div id="navBar">
+    <div class="container ">
+      <div class=" col-md-10 offset-md-1 d-flex justify-content-center">
 
-    <div class="d-flex align-items-center">
-      <h4 class="px-3 py-2">{{ movieDetails.title }} </h4>
-      <button *ngIf="showRecommendButton" class="btn btn-info btn-sm ml-auto mr-4 px-4" (click)="openRecommendation()" type="button">Recommend</button>
-    </div>
+        <div id="navRow" class=" row w-100 d-flex align-items-baseline">
 
-    <div *ngIf="showTextArea" id="review-edit" class="px-2 pb-1 d-flex flex-column justify-content-center align-items-end">
-      <textarea class="w-100 h-100 text-capitalize" [(ngModel)]="reviewText" id="text-area" autofocus spellcheck="false">
-      </textarea>
-      <button class="btn btn-info btn-sm px-4 mx-2 my-2" (click)="postRecommendation()" type="button">Ok</button>
-    </div>
-    <!-- flex-lg-row -->
-    <div class="d-flex flex-column">
+          <button class="btn mx-2 p-0" id="navButton" (click)="goBack()">
+            <i class="fa fa-chevron-left" style="font-size:16px"></i>
+          </button>
 
-      <img class="img-fluid mb-2" src="{{ baseImageUrl + movieDetails.poster_path}}" />
-
-      <div class="px-4 d-flex flex-column ">
-        <p class="mt-auto">{{getGenreDetails(movieDetails.genres)}}</p>
-        <div class="d-flex flex-row">
-
-          <div class="d-flex flex-row">
-            <p class="mr-2">Rating</p>
-            <p class="mr-5">{{ movieDetails.vote_average}}</p>
-          </div>
-          <div class="d-flex flex-row">
-            <p class="mr-2">{{ movieDetails.status }}</p>
-            <p>{{ movieDetails.release_date }}</p>
-          </div>
+          <h5 class="pl-2 mr-auto" [routerLink]="['/']">Movie Place</h5>
+          <button class="btn" id="navButton" [routerLink]="['/search']">
+            <i class="fa fa-search" style="font-size:16px"></i>
+          </button>
         </div>
+
       </div>
     </div>
+  </div>
 
-    <div class="px-3">
-      <p>{{ movieDetails.overview }}</p>
+  <div class="container">
+    <div class="col-md-10 offset-md-1 p-0 mt-4 " *ngIf="movieDetails">
 
-      <div class="d-flex flex-row">
-        <div *ngFor="let language of movieDetails.spoken_languages">
-          <p class="pl-2 pr-4">{{ language.english_name }}</p>
+      <div class="mx-3" id="details-item">
+
+        <div class="d-flex align-items-center">
+          <h4 class="px-3 py-2">{{ movieDetails.title }} </h4>
+          <button  class="btn btn-info btn-sm ml-auto mr-4 px-4"
+              (click)="openAddRecommendation()" type="button">Recommend</button>
         </div>
-        <div *ngFor="let country of movieDetails.production_countries">
-          <p class="px-1">{{ country.name }}</p>
+
+        <div class="d-flex flex-column">
+
+          <img class="img-fluid mb-1" src="{{ baseImageUrl + movieDetails.poster_path}}" />
+
+          <div class="px-4 py-2 d-flex flex-column ">
+            <p class="mt-auto">{{getGenreDetails(movieDetails.genres)}}</p>
+            <div class="d-flex flex-row">
+
+              <div class="d-flex flex-row">
+                <p class="mr-2">Rating</p>
+                <p class="mr-5">{{ movieDetails.vote_average}}</p>
+              </div>
+              <div class="d-flex flex-row">
+                <p class="mr-2">{{ movieDetails.status }}</p>
+                <p>{{ movieDetails.release_date | date: 'd/M/yyyy' }}</p>
+              </div>
+            </div>
+          </div>
+
         </div>
+
+        <div class="px-3">
+          <p>{{ movieDetails.overview }}</p>
+
+          <div class="d-flex flex-row">
+            <div *ngFor="let language of movieDetails.spoken_languages">
+              <p class="pl-2 pr-4">{{ language.english_name }}</p>
+            </div>
+            <div *ngFor="let country of movieDetails.production_countries">
+              <p class="px-1">{{ country.name }}</p>
+            </div>
+          </div>
+
+        </div>
+        <img class="w-100" src="{{ baseImageUrl + movieDetails.backdrop_path}}" />
+
       </div>
 
     </div>
   </div>
+  <br>
 </div>

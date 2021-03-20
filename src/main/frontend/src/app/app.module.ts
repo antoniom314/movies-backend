@@ -1,7 +1,7 @@
-import { ReviewService } from './review/review.service';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,10 +9,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReviewComponent } from './review/review.component';
 import { SearchComponent } from './search/search.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { SearchService } from './search/search.service';
 import { DetailsComponent } from './details/details.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AddReviewComponent } from './add-review/add-review.component';
+import { AdminComponent } from './admin/admin.component';
+import { ReviewService } from './review/review.service';
+import { SearchService } from './search/search.service';
 import { DetailsService } from './details/details.service';
+import { GenresService } from './genres/genres.service';
+import { CacheInterceptor } from './cache.interceptor';
 
 
 @NgModule({
@@ -20,8 +25,10 @@ import { DetailsService } from './details/details.service';
     AppComponent,
     ReviewComponent,
     SearchComponent,
+    DetailsComponent,
     PageNotFoundComponent,
-    DetailsComponent
+    AddReviewComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +36,16 @@ import { DetailsService } from './details/details.service';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [ReviewService, SearchService, DetailsService],
+  providers: [ReviewService,
+    SearchService,
+    DetailsService,
+    GenresService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CacheInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

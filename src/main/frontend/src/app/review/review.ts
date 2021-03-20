@@ -1,7 +1,8 @@
-class Review {
+export interface Review {
   id: any;
   title: string;
-  imagePath: string;
   text: string;
+  genre: string;
+  imagePath: string;
   date: string;
 }

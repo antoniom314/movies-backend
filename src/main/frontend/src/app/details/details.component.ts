@@ -1,35 +1,53 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { title } from 'process';
-import { ReviewService } from '../review/review.service';
-import { GenreHandler } from '../search/genreHandler';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { GenresService } from '../genres/genres.service';
 import { DetailsService } from './details.service';
+import { GenreIds, Details } from './details';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css'],
-  providers: [DatePipe]
+  providers: [DatePipe],
 })
 export class DetailsComponent implements OnInit {
 
-  public movieDetails: MovieDetails;
-
+  public movieDetails: Details;
+  // Movie TMDB id to send to AddReviewComponent
+  public movieIdTMDB: string;
+  private searchString: string;
   public baseImageUrl = 'https://image.tmdb.org/t/p/w342';
-  public chousedMovieId: number;
-  public reviewText: string;
 
-  public showTextArea = false;
-  public showRecommendButton = true;
-  private genreHandler: GenreHandler;
+  public genresString: string;
 
-  private date: Date;
+  constructor(
+    private detailsService: DetailsService,
+    private activeRoute: ActivatedRoute,
+    private router: Router,
+    private genresService: GenresService
+   ) { }
 
-  constructor(private detailsService: DetailsService,
-    private reviewService: ReviewService,
-    private activeRoutes: ActivatedRoute,
-    private datePipe: DatePipe
-  ) { }
+  ngOnInit() {
+    // Get movie details with id prametar passed from a search component
+    this.activeRoute.queryParams.subscribe(params => {
+      this.getMovieDetails(params['id']);
+      this.movieIdTMDB = params['id'];
+      this.searchString = params['search'];
+    });
+    // For testing
+    // this.getMockMovieDetails();
+  }
+
+  public goBack() {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        search: this.searchString
+      },
+    };
+    // Go back to search page and pass search string to ActiveRoutes
+    const relativePath = '/search';
+    this.router.navigate([relativePath], navigationExtras);
+  }
 
   public getMovieDetails(movieId: number) {
     this.detailsService.movieDetailsAPI(movieId).subscribe((data) => {
@@ -44,46 +62,21 @@ export class DetailsComponent implements OnInit {
   }
 
   public getGenreDetails(ids: GenreIds[]): string {
-
-    return this.genreHandler.getGenresForDetails(ids);
+    return this.genresService.getGenresForDetails(ids);
   }
 
-  public openRecommendation () {
+  public openAddRecommendation() {
 
-    this.showTextArea = !this.showTextArea;
-    // this.showRecommendButton = false;
-  }
-
-  public postRecommendation () {
-    this.showTextArea = false;
-    // Get current day string
-    const date = new Date();
-    const dateString: string = this.datePipe.transform(date, 'dd MM yyyy');
-
-    const review = {'id': 0,
-    'title': this.movieDetails.title,
-    'imagePath': this.movieDetails.poster_path,
-    // tslint:disable-next-line: max-line-length
-    'text': this.reviewText,
-    'date': dateString};
-
-
-    this.reviewService.save(review).subscribe();
-  }
-
-  ngOnInit() {
-
-    /// Get movie genres from file
-    this.detailsService.getGenres().subscribe((genreMapJSON) => {
-      this.genreHandler = GenreHandler.getInstance(genreMapJSON);
-    });
-
-    // Get movie details with id from a movie search result
-    this.activeRoutes.params.subscribe(string => {
-      this.getMovieDetails(string['id']);
-    });
-
-    // For testing
-    // this.getMockMovieDetails();
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        movieId: this.movieIdTMDB,
+        search: this.searchString,
+        title: this.movieDetails.title,
+        genre: this.genresString,
+        imagePath: this.movieDetails.poster_path,
+        date: this.movieDetails.release_date
+      },
+    };
+    this.router.navigate(['/add-review'], navigationExtras);
   }
 }

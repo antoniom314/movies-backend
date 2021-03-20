@@ -12,46 +12,49 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-public class RecommendationControler {
+public class RecommendationController {
 
     @Autowired
     RecommendationRepository recRepository;
 
-    @GetMapping("/api/review")
+    @GetMapping("/api/get_reviews")
     public List<Recommendation> getAllRecommendations(){
-
         return recRepository.findAll();
     }
 
-    @GetMapping("/api/review/{id}")
-    public Recommendation getRecommendationDetail(@PathVariable Long id){
-        Optional<Recommendation> rec = recRepository.findById(id);
+    @PostMapping("/api/add_review")
+    public Recommendation addRecommendation(@RequestBody Recommendation rec){
 
-//        if (!rec.isPresent()){
-//            ResponseEntity.notFound().build();
-//        }
-
-        return rec.get();
+        return recRepository.save(rec);
     }
 
-    @PostMapping("/api/review")
-    public Recommendation addRecommendation(@RequestBody Recommendation rec){ return recRepository.save(rec); }
+    @GetMapping("/api/get_review/{id}")
+    public Recommendation getRecommendationDetail(@PathVariable Long id){
 
-    @PutMapping("/api/review/{id}")
+        Optional<Recommendation> optional = recRepository.findById(id);
+
+        if (!optional.isPresent()){
+            ResponseEntity.notFound().build();
+        }
+        return optional.get();
+    }
+
+    @PutMapping("/api/edit_review/{id}")
     public Recommendation updateRecommendation(@RequestBody Recommendation rec, @PathVariable Long id){
 
-//        Optional<Recommendation> recommendationOptional = recRepository.findById(id);
-//
-//        if (!recommendationOptional.isPresent()){
-//            ResponseEntity.notFound().build();
-//        }
+        Optional<Recommendation> optional = recRepository.findById(id);
+
+        if (!optional.isPresent()){
+            ResponseEntity.notFound().build();
+        }
         rec.setId(id);
 
         return recRepository.save(rec);
     }
 
-    @DeleteMapping("/api/review/{id}")
+    @DeleteMapping("/api/delete_review/{id}")
     public void deleteRecommendation(@PathVariable Long id){
+
         recRepository.deleteById(id);
     }
 }
