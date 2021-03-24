@@ -1,6 +1,7 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { AutofocusDirective } from '../autofocus.directive';
 import { GenresService } from '../genres/genres.service';
 import { Result, Search } from './search';
 import { SearchService } from './search.service';
@@ -19,24 +20,40 @@ export class SearchComponent implements OnInit {
 
   // search string from a user input
   public searchString = '';
-  public baseImageUrl = 'https://image.tmdb.org/t/p/w154';
+  public baseImageUrl = 'https://image.tmdb.org/t/p/w92';
 
   constructor(private searchService: SearchService,
     private genresService: GenresService,
     private activeRoute: ActivatedRoute,
     private router: Router) {}
 
+  // tslint:disable-next-line: no-output-rename
+  @Output('hideSearchBar') hideSearchBar: EventEmitter<any> = new EventEmitter();
+
   ngOnInit() {
     // Get movie details with id prametar passed from a search component
     this.activeRoute.queryParams.subscribe((string) => {
       this.searchString = string['search'];
       if (this.searchString) {
-
         this.searchMovies(this.searchString);
       }
     });
+
     // for testing
     // this.searchMockMovies();
+  }
+
+  public goBack() {
+    this.hideSearchBar.emit();
+    this.searchString = '';
+    this.search = null;
+    this.results = null;
+
+    const navigationExtras: NavigationExtras = {
+      queryParams: { }
+    };
+    // Go back to review page and pass search string to ActiveRoutes
+    this.router.navigate(['/review'], navigationExtras);
   }
 
   public showMovieDetail(movieId: number) {

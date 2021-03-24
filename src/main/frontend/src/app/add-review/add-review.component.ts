@@ -35,9 +35,6 @@ export class AddReviewComponent implements OnInit {
       this.movieIdTMDB = params['movieId'];
       this.searchString = params['search'];
 
-      console.log(params['date']);
-
-
       this.review = {
         id: -1,
         title: params['title'],
@@ -55,10 +52,20 @@ export class AddReviewComponent implements OnInit {
       queryParams: {
         id: this.movieIdTMDB,
         search: this.searchString
-      },
+      }
     };
     const relativePath = '/details/' + this.movieIdTMDB;
     this.router.navigate([relativePath], navigationExtras);
+  }
+
+  public goSearch() {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        search: ''
+      }
+    };
+    // Go back to search page and pass search string to ActiveRoutes
+    this.router.navigate(['/review'], navigationExtras);
   }
 
   public postRecommendation() {

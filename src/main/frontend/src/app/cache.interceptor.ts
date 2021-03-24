@@ -21,21 +21,24 @@ export class CacheInterceptor implements HttpInterceptor {
     }
 
     if (request.headers.get('resetCache') === 'true') {
-      console.log('Cache reseted');
       this.cache.delete(request.urlWithParams);
     }
 
     const cachedResponse: HttpResponse<any> = this.cache.get(request.urlWithParams);
 
     if (cachedResponse) {
-      console.log('Cached HttpResponse');
       return of(cachedResponse.clone());
 
     } else {
       return handler.handle(request).pipe(
         tap(response => {
           if (response instanceof HttpResponse) {
-            this.cache.set(request.urlWithParams, response);
+
+            console.log(response.ok);
+            console.log(response.status);
+            console.log(response.statusText);
+
+            // this.cache.set(request.urlWithParams, response);
           }
         })
       );

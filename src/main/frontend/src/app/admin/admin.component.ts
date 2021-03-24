@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { Review } from '../review/review';
 import { ReviewService } from '../review/review.service';
 
@@ -24,7 +24,8 @@ export class AdminComponent implements OnInit {
 
   public baseImageUrl = 'https://image.tmdb.org/t/p/w300';
 
-  constructor(private reviewService: ReviewService) { }
+  constructor(private reviewService: ReviewService,
+    private router: Router ) { }
 
   ngOnInit() {
     this.getReviews();
@@ -97,5 +98,15 @@ export class AdminComponent implements OnInit {
         this.loginError = 'Unauthorized user';
         break;
     }
+  }
+
+  public goSearch() {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        search: ''
+      }
+    };
+    // Go back to search page and pass search string to ActiveRoutes
+    this.router.navigate(['/review'], navigationExtras);
   }
 }

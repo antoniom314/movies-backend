@@ -42,11 +42,20 @@ export class DetailsComponent implements OnInit {
     const navigationExtras: NavigationExtras = {
       queryParams: {
         search: this.searchString
-      },
+      }
     };
     // Go back to search page and pass search string to ActiveRoutes
-    const relativePath = '/search';
-    this.router.navigate([relativePath], navigationExtras);
+    this.router.navigate(['/review'], navigationExtras);
+  }
+
+  public goSearch() {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        search: ''
+      }
+    };
+    // Go back to search page and pass search string to ActiveRoutes
+    this.router.navigate(['/review'], navigationExtras);
   }
 
   public getMovieDetails(movieId: number) {
@@ -62,10 +71,13 @@ export class DetailsComponent implements OnInit {
   }
 
   public getGenreDetails(ids: GenreIds[]): string {
-    return this.genresService.getGenresForDetails(ids);
+    this.genresString = this.genresService.getGenresForDetails(ids);
+    return this.genresString;
   }
 
   public openAddRecommendation() {
+
+    console.log(this.genresString);
 
     const navigationExtras: NavigationExtras = {
       queryParams: {

@@ -9,7 +9,7 @@ import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: 'review', component: ReviewComponent},
-  { path: 'search', component: SearchComponent},
+  // { path: 'search', component: SearchComponent},
   { path: 'details/:id', component: DetailsComponent},
   { path: 'add-review', component: AddReviewComponent},
   { path: 'admin', component: AdminComponent},

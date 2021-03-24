@@ -10,8 +10,8 @@
             <i class="fa fa-chevron-left" style="font-size:16px"></i>
           </button>
 
-          <h5 class="pl-2 mr-auto" [routerLink]="['/']">Movie Place</h5>
-          <button class="btn" id="navButton" [routerLink]="['/search']">
+          <h5 class="mt-2 pl-2 mr-auto" [routerLink]="['/']">Movie Place</h5>
+          <button class="btn" id="navButton" (click)="goSearch()">
             <i class="fa fa-search" style="font-size:16px"></i>
           </button>
         </div>
@@ -26,12 +26,14 @@
 
         <div id="review-item" class="d-flex">
           <div class="col p-4 d-flex flex-column ">
-            <textarea maxlength="256" class="w-100 h-100" [(ngModel)]="reviewText" id="text-area" autofocus spellcheck="false">
+            <textarea maxlength="254" class="w-100 h-100"
+             [(ngModel)]="reviewText" id="text-area"
+             autofocus spellcheck="false">
             </textarea>
             <div class="pt-2 px-2">
               <h5>{{ review.title }}</h5>
               <div class="d-flex">
-                <p class="m-0 mr-4">{{ review.date }}</p>
+                <p class="m-0 mr-4">{{ review.date | date: 'yyyy' }}</p>
                 <p class="m-0">{{ review.genre }}</p>
               </div>
             </div>

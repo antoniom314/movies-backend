@@ -18,6 +18,7 @@ import { SearchService } from './search/search.service';
 import { DetailsService } from './details/details.service';
 import { GenresService } from './genres/genres.service';
 import { CacheInterceptor } from './cache.interceptor';
+import { AutofocusDirective } from './autofocus.directive';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { CacheInterceptor } from './cache.interceptor';
     DetailsComponent,
     PageNotFoundComponent,
     AddReviewComponent,
-    AdminComponent
+    AdminComponent,
+    AutofocusDirective
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Review } from './review';
 
 import { ReviewService } from './review.service';
@@ -11,11 +12,23 @@ import { ReviewService } from './review.service';
 export class ReviewComponent implements OnInit {
 
   public reviews: Review[];
+  public searchString = '';
   public baseImageUrl = 'https://image.tmdb.org/t/p/w300';
 
-  constructor(private reviewService: ReviewService) { }
+  public showSearch = false;
+
+  constructor(private reviewService: ReviewService,
+    private activeRoute: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
+    // Get movie details with id prametar passed from a search component
+    this.activeRoute.queryParams.subscribe((string) => {
+      this.searchString = string['search'];
+      if (this.searchString || this.searchString === '') {
+        this.showSearchBar();
+      }
+    });
     this.getReviews();
   }
 
@@ -23,5 +36,14 @@ export class ReviewComponent implements OnInit {
     this.reviewService.getAllReviews().subscribe(data => {
       this.reviews = data.reverse();
     });
+  }
+
+  public hideSearchBar() {
+    this.showSearch = false;
+    this.router.navigate(['/review']);
+  }
+
+  public showSearchBar() {
+   this.showSearch = true;
   }
 }

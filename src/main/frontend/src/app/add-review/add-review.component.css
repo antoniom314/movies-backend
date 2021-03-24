@@ -1,5 +1,5 @@
 #navBar {
-
+  height: 2.6em;
   background-color: rgba(23, 162, 184, 1);
 }
 #navRow {
@@ -9,13 +9,9 @@
   background-color: rgba(0, 0, 0, 0);
 }
 #text-area {
-
   resize: none;
   border-color: rgba(0, 0, 0, 0.2);
   outline-color: rgba(0, 0, 0, 0.205);
-
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
 }
 #review-item {
   font-size: small;

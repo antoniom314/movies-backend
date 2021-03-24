@@ -1,13 +1,14 @@
 <div>
 
-  <div id="navBar">
+  <div  *ngIf="!showSearch" id="navBar">
     <div class="container">
       <div class="col-md-10 offset-md-1 d-flex justify-content-center">
 
         <div id="navRow" class="row w-100 d-flex align-items-baseline">
 
-          <h5 class="pl-2 mr-auto" [routerLink]="['/']">Movie Place</h5>
-          <button class="btn" id="navButton" [routerLink]="['/search']">
+          <h5 class="mt-2 pl-2 mr-auto" [routerLink]="['/']">Movie Place</h5>
+
+          <button class="btn" id="navButton" (click)="showSearchBar()">
             <i class="fa fa-search" style="font-size:16px"></i>
           </button>
         </div>
@@ -15,6 +16,8 @@
       </div>
     </div>
   </div>
+
+  <app-search *ngIf="showSearch" (hideSearchBar)="hideSearchBar()"></app-search>
 
   <div class="container">
     <div class="col-md-10 offset-md-1 ">
