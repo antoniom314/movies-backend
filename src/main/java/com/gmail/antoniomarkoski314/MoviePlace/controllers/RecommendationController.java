@@ -1,5 +1,6 @@
 package com.gmail.antoniomarkoski314.MoviePlace.controllers;
 
+import com.gmail.antoniomarkoski314.MoviePlace.Properties;
 import com.gmail.antoniomarkoski314.MoviePlace.entities.Recommendation;
 import com.gmail.antoniomarkoski314.MoviePlace.repositories.RecommendationRepository;
 import org.apache.catalina.User;
@@ -11,11 +12,14 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://digitalplayground.online:4303")
 public class RecommendationController {
 
-    @Autowired
     RecommendationRepository recRepository;
+
+    public RecommendationController(RecommendationRepository recRepository) {
+        this.recRepository = recRepository;
+    }
 
     @GetMapping("/api/get_reviews")
     public List<Recommendation> getAllRecommendations(){
